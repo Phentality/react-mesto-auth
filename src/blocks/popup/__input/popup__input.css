@@ -1,0 +1,25 @@
+.popup__input {
+    font-family: inherit;
+    display: block;
+    padding: 0;
+    border: 0;
+    max-width: 358px;
+    height: 36px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(188,188,196, .7);
+    background-color: transparent;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0px 36px 0;
+}
+
+.popup__input:focus {outline-color:lightblue;}
+
+@media (min-width: 320px) and (max-width:890px) {
+    .popup__input {
+        max-width: 238px;
+        margin: 0px 22px 20px;
+    }
+}

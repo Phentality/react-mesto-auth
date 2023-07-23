@@ -1,0 +1,19 @@
+.profile {
+    max-width: 880px;
+    margin: 40px auto 0px;
+    font-family: 'Inter', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 320px) and (max-width:890px) {
+    .profile {
+        max-width: 282px;
+        margin: 42px auto 0px;
+        flex-direction: column;
+    }
+}
+
+
