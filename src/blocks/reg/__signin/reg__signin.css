@@ -1,0 +1,8 @@
+.reg__signin {
+    max-width: 358px;
+    max-height: 18px;
+    padding: 0;
+    margin: 15px auto 0;
+    display: flex;
+    justify-content: center;
+}

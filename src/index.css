@@ -46,3 +46,15 @@
 @import url(./blocks/popup/__error/popup__error.css);
 @import url(./blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(./blocks/popup/__title/popup__title.css);
+@import url(./blocks/login/login.css);
+@import url(./blocks/login/__button/login__button.css);
+@import url(./blocks/login/__form/login__form.css);
+@import url(./blocks/login/__title/login__title.css);
+@import url(./blocks/login/__input/login__input.css);
+@import url(./blocks/reg/reg.css);
+@import url(./blocks/reg/__button/reg__button.css);
+@import url(./blocks/reg/__form/reg__form.css);
+@import url(./blocks/reg/__input/reg__input.css);
+@import url(./blocks/reg/__login-link/reg__login-link.css);
+@import url(./blocks/reg/__signin/reg__signin.css);
+@import url(./blocks/reg/__title/reg__title.css);
