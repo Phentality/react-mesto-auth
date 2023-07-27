@@ -1,16 +1,51 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import * as Auth from '../utils/Auth.js';
 
-function Register(props) {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+function Register() {
+    const [formValue, setFormValue] = React.useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormValue({
+            ...formValue,
+            [name]: value
+        });
+    }
+    const navigate = useNavigate();
+    const handleSumbit = (e) => {
+        e.preventDefault();
+        const { email, password } = formValue;
+        Auth.register(email, password).then((res) => {
+            navigate('/signin', { replace: true });
+        })
+    }
 
     return (
         <div className='reg'>
             <p className='reg__title'>Регистрация</p>
-            <form className='reg__form'>
-                <input className='reg__input' id='email' name='email' placeholder="Email" type='email' value={email}  required />
-                <input className='reg__input' id='password' name='password' placeholder="Пароль" type='password' value={password}  required  />
+            <form className='reg__form' onSubmit={handleSumbit}>
+                <input
+                    className='reg__input'
+                    id='email' name='email'
+                    placeholder="Email"
+                    type='email'
+                    value={formValue.email}
+                    onChange={handleChange}
+                    required />
+                <input
+                    className='reg__input'
+                    id='password'
+                    name='password'
+                    placeholder="Пароль"
+                    type='password'
+                    value={formValue.password}
+                    onChange={handleChange}
+                    required />
                 <button className="reg__button" type="submit" aria-label="Зарегистрироваться" name="signin" value="">Зарегистрироваться</button>
             </form>
             <div className='reg__signin'>

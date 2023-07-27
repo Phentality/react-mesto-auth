@@ -1,8 +1,10 @@
 .header {
     max-width: 880px;
+    font-family: 'Inter', Arial, sans-serif;
     margin: 45px auto 0px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 0;
     border-bottom: 1px solid rgba(84,84,84, .7);
 }
