@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Auth from '../utils/Auth.js';
 
-function Register() {
+function Register(props) {
     const [formValue, setFormValue] = React.useState({
         email: '',
         password: ''
@@ -20,9 +20,14 @@ function Register() {
     const handleSumbit = (e) => {
         e.preventDefault();
         const { email, password } = formValue;
-        Auth.register(email, password).then((res) => {
+        Auth.register(email, password).then(() => {
             navigate('/signin', { replace: true });
+            props.openAffirmativePopup();
         })
+            .catch((err) => {
+                console.log(err);
+                props.openNegativePopup();
+            })
     }
 
     return (

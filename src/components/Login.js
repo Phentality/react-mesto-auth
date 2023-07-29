@@ -7,7 +7,6 @@ function Login(props) {
         email: '',
         password: ''
     });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -20,20 +19,20 @@ function Login(props) {
 
     const handleSumbit = (e) => {
         e.preventDefault();
-        if (!formValue.email || !formValue.password){
+        if (!formValue.email || !formValue.password) {
             return;
         }
-        Auth.authorize(formValue.email, formValue.password).then((data) =>{
+        Auth.authorize(formValue.email, formValue.password).then((data) => {
             if (data.token) {
-                console.log(data);
-                setFormValue({email: '', password: ''});
+                setFormValue({ email: '', password: '' });
+                navigate('/', { replace: true });
+                localStorage.setItem('email', formValue.email);
                 props.handleLogin();
-                navigate('/', {replace: true});
             }
         })
-        .catch((err) => {
-            console.log(err);
-        })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     return (

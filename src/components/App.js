@@ -3,6 +3,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
 import React from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
@@ -20,9 +21,12 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
+  const [infoData, setInfoData] = React.useState({});
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '' });
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [email, setEmail] = React.useState('');
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
@@ -63,6 +67,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsImagePopupOpen(false);
+    setIsInfoPopupOpen(false);
     setSelectedCard({ name: '', link: '' });
   };
 
@@ -117,6 +122,24 @@ function App() {
 
   const handleLogin = () => {
     setLoggedIn(true);
+    console.log(localStorage.getItem('email'));
+    setEmail(localStorage.getItem('email'));
+  }
+
+  const isInfoAffirmativeOpen = () => {
+    setInfoData({
+      link: true,
+      title: 'Вы успешно зарегистрировались!'
+    })
+    setIsInfoPopupOpen(true);
+  }
+
+  const isInfoNegativePopup = () => {
+    setInfoData({
+      link: false,
+      title: 'Что-то пошло не так! Попробуйте ещё раз.'
+    })
+    setIsInfoPopupOpen(true);
   }
 
   const navigate = useNavigate();
@@ -139,14 +162,18 @@ function App() {
     tokenCheck();
   }, []);
 
+  React.useEffect(() => {
+    setEmail(localStorage.getItem('email'));
+  }, []);
+
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header email={email}/>
         <Routes>
           <Route path="/" element={<ProtectedRoute loggedIn={loggedIn} component={Main} cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleImageClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />} />
           <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/signup" element={<Register />} />
+          <Route path="/signup" element={<Register openAffirmativePopup={isInfoAffirmativeOpen} openNegativePopup={isInfoNegativePopup} />} />
           <Route path="*" element={!loggedIn ? <Navigate to="/" /> : <Navigate to="/signup" />} />
         </Routes>
         <EditProfilePopup btnName={isLoading ? 'Сохранение...' : 'Сохранить'} isOpened={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
@@ -154,6 +181,7 @@ function App() {
         <AddPlacePopup btnName={isLoading ? 'Создание...' : 'Создать'} isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
         <PopupWithForm name="delete" title="Вы уверены?" onClose={closeAllPopups} buttonText="Да" />
         <ImagePopup onClose={closeAllPopups} isOpened={isImagePopupOpen} card={selectedCard} />
+        <InfoTooltip onClose={closeAllPopups} isOpened={isInfoPopupOpen} data={infoData} />
         <Footer />
       </CurrentUserContext.Provider>
     </div>
