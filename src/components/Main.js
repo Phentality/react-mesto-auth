@@ -11,8 +11,8 @@ function Main(props) {
                 <div className="profile__card">
                     <div className="profile__image">
                         <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
-                        <div className="profile__overlay">
-                            <button className="profile__avataredit" onClick={props.onEditAvatar} type="button" aria-label="сменить" name="change"></button>
+                        <div className="profile__overlay" onClick={props.onEditAvatar}>
+                            <button className="profile__avataredit" type="button" aria-label="сменить" name="change"></button>
                         </div>
                     </div>
                     <div className="profile__info">

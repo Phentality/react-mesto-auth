@@ -10,12 +10,10 @@ export const register = (email, password) => {
     body: JSON.stringify({ email, password })
   })
     .then((response) => {
-      if (response.status === 200 || 201) {
-        return response.json();
-      }
+      return response;
     })
-    .then((res) => {
-      return res;
+    .catch((err) => {
+      console.log(err);
     })
 };
 export const authorize = (email, password) => {
@@ -28,12 +26,6 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password })
   })
     .then((response => response.json()))
-    .then((data) => {
-      if (data) {
-        localStorage.setItem('jwt', data.token);
-        return data;
-      }
-    })
 };
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {

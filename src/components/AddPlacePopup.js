@@ -32,6 +32,8 @@ function AddPlacePopup(props) {
                 placeholder="Название"
                 name="place"
                 type="text"
+                minLength='2'
+                maxLength='30'
                 value={name}
                 onChange={handleChangeName}
                 required />

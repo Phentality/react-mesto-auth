@@ -24,6 +24,7 @@ function Login(props) {
         }
         Auth.authorize(formValue.email, formValue.password).then((data) => {
             if (data.token) {
+                localStorage.setItem('jwt', data.token);
                 setFormValue({ email: '', password: '' });
                 navigate('/', { replace: true });
                 localStorage.setItem('email', formValue.email);

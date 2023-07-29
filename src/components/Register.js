@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Auth from '../utils/Auth.js';
 
 function Register(props) {
@@ -16,17 +16,20 @@ function Register(props) {
             [name]: value
         });
     }
-    const navigate = useNavigate();
     const handleSumbit = (e) => {
         e.preventDefault();
         const { email, password } = formValue;
-        Auth.register(email, password).then(() => {
-            navigate('/signin', { replace: true });
-            props.openAffirmativePopup();
+        Auth.register(email, password).then((response) => {
+            console.log(response.status);
+            if (response.status === 201) {
+                props.openAffirmativePopup();
+            }
+            else {
+                props.openNegativePopup();
+            }
         })
             .catch((err) => {
-                console.log(err);
-                props.openNegativePopup();
+                console.log(err)
             })
     }
 

@@ -122,7 +122,6 @@ function App() {
 
   const handleLogin = () => {
     setLoggedIn(true);
-    console.log(localStorage.getItem('email'));
     setEmail(localStorage.getItem('email'));
   }
 
