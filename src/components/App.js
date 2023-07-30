@@ -168,7 +168,7 @@ function App() {
   return (
     <div>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header email={email}/>
+        <Header email={email} />
         <Routes>
           <Route path="/" element={<ProtectedRoute loggedIn={loggedIn} component={Main} cards={cards} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleImageClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />} />
           <Route path="/signin" element={<Login handleLogin={handleLogin} />} />

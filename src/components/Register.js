@@ -19,17 +19,12 @@ function Register(props) {
     const handleSumbit = (e) => {
         e.preventDefault();
         const { email, password } = formValue;
-        Auth.register(email, password).then((response) => {
-            console.log(response.status);
-            if (response.status === 201) {
-                props.openAffirmativePopup();
-            }
-            else {
-                props.openNegativePopup();
-            }
+        Auth.register(email, password).then(() => {
+            props.openAffirmativePopup();
         })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
+                props.openNegativePopup();
             })
     }
 
